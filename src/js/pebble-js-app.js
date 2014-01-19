@@ -312,6 +312,9 @@ Pebble.addEventListener('appmessage', function(e) {
 			case 'input_back':
 				requestObj.method = 'Input.Back';
 				break;
+			case 'show_osd':
+				requestObj.method = 'Input.ShowOSD';
+				break;
 			case 'play_pause':
 				requestObj.method = 'Player.PlayPause';
 				requestObj.params.playerid = 1;

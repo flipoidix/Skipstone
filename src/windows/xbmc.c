@@ -216,7 +216,19 @@ static void down_long_click_handler(ClickRecognizerRef recognizer, void *context
 }
 
 static void select_double_click_handler(ClickRecognizerRef recognizer, void *context) {
-  send_request("input_back");
+    switch (controlling_type) {
+    case CONTROLLING_TYPE_KEYPAD:
+      send_request("input_back");
+      break;
+    case CONTROLLING_TYPE_SEEK:
+      controlling_type = CONTROLLING_TYPE_KEYPAD;
+      display_action_bar_icons();
+      send_request("show_osd");
+      break;
+    case CONTROLLING_TYPE_VOLUME:
+      send_request("input_back");
+      break;
+  }
 }
 
 static void select_long_click_handler(ClickRecognizerRef recognizer, void *context) {
